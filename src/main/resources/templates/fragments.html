@@ -13,19 +13,31 @@
 
 <body>
 
-    <div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a th:href="@{/}" class="navbar-brand">TechJobs</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a th:href="@{/search}">Search</a></li>
-                    <li><a th:href="@{/list}">List</a></li>
-                </ul>
-            </div>
+<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a th:href="@{/}" class="navbar-brand">TechJobs</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/search}">Search</a></li>
+                <li><a th:href="@{/list}">List</a></li>
+            </ul>
         </div>
     </div>
+</div>
+
+<div th:fragment="searching">
+    <div th:if="${listItems} and ${listItems.size()}">
+
+        <table th:each="items : ${listItems}" class="job-listing">
+            <tr th:each="item, idx : ${items}" th:class="${idx.odd} ? 'odd'">
+                <td th:text="${#strings.capitalizeWords(item.key)}"></td>
+                <td ><a th:href="@{/list/jobs(column=${item.key}, value=${item.value})}" th:text="${#strings.capitalizeWords(item.value)}"></a></td>
+            </tr>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

@@ -58,8 +58,9 @@ public class ListController {
 
         ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(column, value);
         model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
-        model.addAttribute("jobs", jobs);
-
+        //model.addAttribute("jobs", jobs); //jobs AL Hash made above. Passed to list-jobs.
+        model.addAttribute("listItems", jobs);
+        model.addAttribute("column", columnChoices);
         return "list-jobs";
     }
 }
